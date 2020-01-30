@@ -12,13 +12,9 @@
 
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
-function message(a){
-  let result = a;
-  return result
+function returnFirstArgument(a){
+  return a;
 }
-let result = message("Все привет это функция!!!");
-console.log(result);
-
 /*
  Задание 2:
 
@@ -33,13 +29,9 @@ console.log(result);
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sum(a, b){
-  var result = a + b;
-  return result
+function sumWithDefaults(a, b){
+  return a + b;
 }
-console.log(sum(53,100));
-
-
 /*
  Задание 3:
 
@@ -48,16 +40,13 @@ console.log(sum(53,100));
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
-function makeCounter() {
+function returnFnResult(fn) {
   var currentCount = 1;
 
   return function() { 
     return currentCount;
   };
 }
-var counter = makeCounter(); 
-console.log( counter() );  
-
 /*
  Задание 4:
 
@@ -70,19 +59,12 @@ console.log( counter() );
    console.log(f()); // выведет 11
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
- */
-function makeCounter() {
+ */function returnCounter(number) {
   var currentCount = 1;
-
-  return function() { 
+  return function(number) { 
     return currentCount++;
   };
 }
-var counter = makeCounter(); 
-console.log( counter() ); 
-console.log( counter() ); 
-console.log( counter() ); 
-
 /*
  Задание 5 *:
 
