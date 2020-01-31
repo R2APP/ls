@@ -13,7 +13,7 @@
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
 function returnFirstArgument(a) {
-  return a;
+    return a;
 }
 /*
  Задание 2:
@@ -29,8 +29,8 @@ function returnFirstArgument(a) {
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sumWithDefaults(a, b=100) {
-  return a + b;
+function sumWithDefaults(a, b = 100) {
+    return a + b;
 }
 /*
  Задание 3:
@@ -41,7 +41,7 @@ function sumWithDefaults(a, b=100) {
    returnFnResult(() => 'привет') вернет 'привет'
  */
 function returnFnResult(fn) {
-  return fn();
+    return fn();
 }
 /*
  Задание 4:
@@ -57,9 +57,9 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 13
  */
 function returnCounter(x = 0) {
-  return function F() {
-    return ++x;
-}
+    return function F() {
+        return ++x;
+    }
 }
 /*
  Задание 5 *:
@@ -71,11 +71,13 @@ function returnCounter(x = 0) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-  var result = [];
-  for (var i = 0; i < arguments.length; i++) {
-      result[i] = arguments[i];
-  }
-  return result;
+    var result = [];
+    
+    for (var i = 0; i < arguments.length; i++) {
+        result[i] = arguments[i];
+    }
+
+    return result;
 }
 
 /*
@@ -94,8 +96,9 @@ function returnArgumentsArray() {
    console.log(newSum()) выведет 6
  */
 function bindFunction(F, a, b) {
-  F = F.bind(null, a, b);
-  return F;
+    F.bind(null, a, b)
+
+    return F.bind(null, a, b);
 }
 
 export {
