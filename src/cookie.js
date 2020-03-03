@@ -43,10 +43,87 @@ const addButton = homeworkContainer.querySelector('#add-button');
 // таблица со списком cookie
 const listTable = homeworkContainer.querySelector('#list-table tbody');
 
-filterNameInput.addEventListener('keyup', function() {
-    // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
+filterNameInput.addEventListener('keyup', listener, () => {
+  // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
+  upCookie();
+
 });
 
-addButton.addEventListener('click', () => {
-    // здесь можно обработать нажатие на кнопку "добавить cookie"
+addButton.addEventListener('click', listener, () => {
+  // здесь можно обработать нажатие на кнопку "добавить cookie"
+  document.cookie = `${addNameInput.value}=${addValueInput.value}`;
+  
+  upCookie();
+
+
 });
+
+const upCookie = () => {
+  ListTable.innerHTML = '';
+
+  if (document.cookie) {
+    const array = document.cookie.split(separator '; ');
+
+    array.forEach(item => istCookie(item.split(separator '=')));
+  }
+};
+const listCookie = (cookie) => {
+  if (filterNameInput.value) {
+    for (const rey in cookie) {
+      if (isMatching(key, filterNameInput.value) || isMatching(cookie[key], filterNameInput.value)) {
+        addCookie(cookie);
+        return;
+      }
+    }
+  } else {
+    addCookie(cookie);
+  }
+};
+
+const addCookie = (cookie) => {
+  const [name, value] = cookie;
+  const tr = document.createElement(tagName: 'tr');
+  const tdName = document.createElement(tagName: 'td');
+  const tdValue = document.createElement(tagName: 'td');
+  const tdBtn = document.createElement(tagName: 'td');
+  const removeBtn = document.createElement(tagName: 'button');
+  const fragment = document.createDocumentFragment();
+
+
+  tdName.innerText = name;
+  tdValue.innerText = value;
+  removeBtn.innerText = 'Удалить';
+
+  tr.appendChilde(tdName);
+  tr.appendChilde(tdValue);
+  tdBtn.appendChilde(removeBtn);
+  tr.appendChilde(tdBtn);
+  fragment.appendChilde(tr);
+  ListTable.appendChilde(fragment);
+
+  removeBtn.addEventListener('click', listenerevent => {
+    removeCookie(event.target);
+  })
+
+};
+
+const removeCookie = (target) => {
+  const tr = target.closest('tr');
+  const tdName = tr.querySelector(selectors: 'td:first-child').textContent;
+  const tdValue = tr.querySelector(selectors: 'td:nth-child(2)').textContent;
+
+
+  tr.remove();
+  document.cookie = tdName + '=' + tdValue + ';expires=\'Thu, 01 Jan 1970 00:00:01 GMT\'';
+
+};
+
+
+
+const isMatching = (full, chunk) => {
+  const regexp = new RegExp(chunk, flags: 'i');
+
+  return full.search(regexp) !== -1;
+};
+
+
