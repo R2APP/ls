@@ -113,41 +113,51 @@ function returnBadArguments(fn) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator() {
-    var number = number || 0;
+function calculator(number=0) {
 
     if (typeof number != 'number') {
-        throw new Error('number is not a number');
+        throw new Error("number is not a number");
     }
- 
-    var obj = {
-        sum: function (...args) {
-            return args.reduce((pre, cur) => pre + cur, number);
-        },
- 
-        dif: function (...args) {
-            return args.reduce((pre, cur) => pre - cur, number);
-        },
- 
-        div: function (...args) {
-            let division = (pre, cur) => {
-              
-                if ( (pre === 0) || (cur === 0) ) {
-                    throw new Error('division by 0');
+
+    var ob = {
+        sum: function () {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] === 0) {
+                    throw new Error("division by 0");
                 }
-       
-                return pre / cur;
+                number += arguments[i];
             }
- 
-            return args.reduce(division, number);
+            return number;
         },
- 
-        mul: function (...args) {
-            return args.reduce((pre, cur) => pre * cur, number);
+        dif: function () {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] === 0) {
+                    throw new Error("division by 0");
+                }
+                number -= arguments[i];
+            }
+            return number;
+        },
+        div: function () {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] === 0) {
+                    throw new Error("division by 0");
+                }
+                number /= arguments[i];
+            }
+            return number;
+        },
+        mul: function () {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] === 0) {
+                    throw new Error("division by 0");
+                }
+                number *= arguments[i];
+            }
+            return number;
         }
     }
- 
-    return obj
+    return ob;
 }
 
 /* При решении задач, пострайтесь использовать отладчик */
